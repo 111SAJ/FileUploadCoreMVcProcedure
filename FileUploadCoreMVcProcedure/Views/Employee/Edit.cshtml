@@ -1,0 +1,54 @@
+﻿@model Employee
+
+@{
+    ViewData["Title"] = "Employee Edit";
+}
+
+<h2 class="text-center mb-5">New Employee</h2>
+
+<div class="container">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" id="EmployeeId" name="EmployeeId" value="@Model.EmployeeId" />
+
+        <div class="form-group">
+            <label for="EmployeeName">Name</label>
+            <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" value="@Model.EmployeeName" />
+            <span class="text-danger" asp-validation-for="EmployeeName"></span>
+        </div>
+        <div class="form-group">
+            <label for="EmployeeEmail">Email</label>
+            <input type="email" class="form-control" id="EmployeeEmail" name="EmployeeEmail" value="@Model.EmployeeEmail" />
+            <span class="text-danger" asp-validation-for="EmployeeEmail"></span>
+        </div>
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="Password" name="Password" value="@Model.Password" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <textarea class="form-control" id="Address" name="Address" value="@Model.Address">@Model.Address</textarea>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+        <div class="form-group">
+            <label for="Profile">Current Profile Picture</label>
+            @if (!string.IsNullOrEmpty(Model.Profile))
+            {
+                <div>
+                    <img src="@Url.Content("~/uploads/" + Model.Profile)" alt="Profile Picture" width="100" height="100" />
+                </div>
+            }
+            else
+            {
+                <div>No profile picture available</div>
+            }
+        </div>
+        <div class="form-group">
+            <label for="Profile">Choose new Profile</label>
+            <input type="file" class="form-control" id="Profile" name="profileFile" />
+            <span class="text-danger" asp-validation-for="Profile"></span>
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+    </form>
+</div>
